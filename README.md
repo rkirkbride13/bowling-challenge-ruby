@@ -6,10 +6,18 @@ Ruby Bowling Challenge
 
 This project is a bowling scorecard calculator. The program counts and sums the scores of a bowling game for one player. The code is written in Ruby and test-driven with the RSpec framework.
 
-### To run the test suite:
+## Set-up and Testing:
+### Installation
+To download and initialise this repository:
 ```
 $ git clone https://github.com/rkirkbride13/bowling-challenge-ruby.git
 $ cd bowling-challenge-ruby
+$ gem install bundler
+$ bundle install
+```
+Then, run the test suite from the main directory:
+
+```
 $ rspec
 ```
 
