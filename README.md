@@ -15,7 +15,14 @@ $ cd bowling-challenge-ruby
 $ gem install bundler
 $ bundle install
 ```
-Then, run the test suite from the main directory:
+Run the app from the main directory:
+
+```
+$ rackup
+```
+Then navigate to http://localhost:9292/ in your browser to access the app
+
+To run the test suite from the main directory:
 
 ```
 $ rspec
