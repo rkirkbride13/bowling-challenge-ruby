@@ -1,5 +1,7 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
+require_relative 'lib/frame'
+require_relative 'lib/scoreboard'
 
 class Application < Sinatra::Base
   # This allows the app code to refresh
