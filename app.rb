@@ -13,12 +13,8 @@ class Application < Sinatra::Base
     initialize_game
     @frame = session[:frame]
     @scoreboard = session[:scoreboard]
-    if @scoreboard == []
-      @scoreboard_array = @scoreboard
-      @scoreboard = []
-    else
+    if @scoreboard != []
       @scoreboard_array = @scoreboard.accessScoreboard
-      @scoreboard = @scoreboard
     end
     return erb(:index)
   end
@@ -49,6 +45,11 @@ class Application < Sinatra::Base
     @roll3 = params[:roll]
     @frame.addRoll(@roll3)
     @scoreboard.addFrame(@frame)
+    redirect '/'
+  end
+
+  post '/reset' do
+    session[:initialized?] = false
     redirect '/'
   end
 

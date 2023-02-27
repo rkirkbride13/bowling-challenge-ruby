@@ -6,47 +6,35 @@
     </head>
     <body>
       <div class="maincontainer">
-        <h1>Welcome to the Super Bowl!</h1>
+        <h1>welcome to the super bowl!</h1>
+        <h2>please click a number for each of your rolls</h2>
         <br />
-        
-        <table id="scorecard" class="scorecard">
-          <thead>
-            <tr style="height: 25px; width: 30px">
-              <th scope="col" colspan="2">Frame 1</th>
-              <th scope="col" colspan="2">Frame 2</th>
-              <th scope="col" colspan="2">Frame 3</th>
-              <th scope="col" colspan="2">Frame 4</th>
-              <th scope="col" colspan="2">Frame 5</th>
-              <th scope="col" colspan="2">Frame 6</th>
-              <th scope="col" colspan="2">Frame 7</th>
-              <th scope="col" colspan="2">Frame 8</th>
-              <th scope="col" colspan="2">Frame 9</th>
-              <th scope="col" colspan="3">Frame 10</th>
-              <th scope="col" colspan="2">Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="height: 30px; width: 30px">
-              <% @scoreboard_array.each do |frame| %>
-                <td scope="row" class="rolls"><% frame ? frame.accessFrame[0] : '' %></td>
-                <td scope="row" class="rolls"><% frame ? frame.accessFrame[1] : '' %></td>
-              <% end %>
-              <td rowspan="2" colspan="2" id="total-score"><% @scoreboard == [] ? '' : @scoreboard.total %></td>
-            </tr>
-            <tr style="height: 40px; width: 20px">
-              <td scope="row" colspan="2" id="f1" class="frames"></td>
-              <td scope="row" colspan="2" id="f2" class="frames"></td>
-              <td scope="row" colspan="2" id="f3" class="frames"></td>
-              <td scope="row" colspan="2" id="f4" class="frames"></td>
-              <td scope="row" colspan="2" id="f5" class="frames"></td>
-              <td scope="row" colspan="2" id="f6" class="frames"></td>
-              <td scope="row" colspan="2" id="f7" class="frames"></td>
-              <td scope="row" colspan="2" id="f8" class="frames"></td>
-              <td scope="row" colspan="2" id="f9" class="frames"></td>
-              <td scope="row" colspan="3" id="f10" class="frames"></td>
-            </tr>
-          </tbody>
-        </table>
+        <% if @scoreboard != [] %>
+          <table id="scorecard" class="scorecard">
+            <thead>
+              <tr style="height: 25px; width: 30px">
+                <% @scoreboard_array.each_with_index do |frame, index| %>
+                  <th scope="col" colspan="2">Frame <%=index + 1%></th>
+                <% end %>
+                <th scope="col" colspan="2">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="height: 30px; width: 30px">
+                <% @scoreboard_array.each do |frame| %>
+                  <td scope="row" class="rolls"><%=frame.accessFrame[0]%></td>
+                  <td scope="row" class="rolls"><%=frame.accessFrame[1]%></td>
+                <% end %>
+                <td rowspan="2" colspan="2" id="total-score"><%=@scoreboard.total%></td>
+              </tr>
+              <tr style="height: 40px; width: 20px">
+                <% @scoreboard_array.each do |frame| %>
+                  <td scope="row" colspan="2" class="frames"><%=frame.frameTotal%></td>
+                <% end %>
+              </tr>
+            </tbody>
+          </table>
+        <% end %>
 
         <br /><br /><br />
           <div id="buttons" class='button_group'>
@@ -101,8 +89,9 @@
               <input type="hidden" name="roll" value="10">
               <input class='btn' type='submit' value='10'>
             </form>
-          
-            <button id="reset">Reset</button>
+            <form method="post" action="/reset" class="roll_button">
+              <input class='btn' type='submit' value='Reset'>
+            </form>
           </div>
         </form>
       </div>

@@ -1,29 +1,25 @@
-@import url("https://fonts.googleapis.com/css?family=Warnes&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Graduate&family=Inconsolata:wght@400&display=swap');
 
 body {
-  font-family: "Rajdhani", cursive;
+  font-family: 'Inconsolata', monospace;
   font-size: 13px;
-  background-color: black;
+  background-color: rgb(185, 0, 151);
 }
 
 h1 {
   color: #dfe0e4;
-  font-family: "Warnes", cursive;
+  font-family: 'Graduate', cursive;
   font-size: 60px;
   text-align: center;
-  animation: glow 1s ease-in-out infinite alternate;
 }
-@keyframes glow {
-  from {
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #d84c72, 0 0 20px #d84c72,
-      0 0 25px #d84c72, 0 0 30px #d84c72, 0 0 35px #d84c72;
-  }
-  to {
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #d84c72,
-      0 0 40px #d84c72, 0 0 50px #d84c72, 0 0 60px #d84c72, 0 0 70px #d84c72;
-  }
+
+h2 {
+  color: #dfe0e4;
+  font-family: 'Graduate', cursive;
+  font-size: 30px;
+  text-align: center;
 }
+
 
 .maincontainer {
   display: flex;
@@ -39,17 +35,16 @@ h1 {
 
 .btn {
   color: #fff;
-  background-color: black;
+  background-color: rgb(185, 0, 151);
   padding: 10px;
   border-width: 2px;
   border-color: #fff;
   border-style: double;
-  font-family: "Rajdhani", cursive;
+  font-family: 'Inconsolata', monospace;
 }
 
 table.scorecard {
-  min-width: 500px;
-  background-color: black;
+  background-color: rgb(185, 0, 151);
   border-collapse: collapse;
   border-width: 2px;
   border-color: #fff;
@@ -57,7 +52,6 @@ table.scorecard {
   color: #fff;
   table-layout: fixed;
   text-align: center;
-  width: 50vw;
 }
 
 table.scorecard td,
