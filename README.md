@@ -1,5 +1,5 @@
 
-Ruby Bowling Challenge
+Super Bowling
 =================
 
 ## Overview
@@ -10,8 +10,8 @@ This project is a bowling scorecard calculator. The program counts and sums the 
 ### Installation
 To download and initialise this repository:
 ```
-$ git clone https://github.com/rkirkbride13/bowling-challenge-ruby.git
-$ cd bowling-challenge-ruby
+$ git clone https://github.com/rkirkbride13/super-bowling.git
+$ cd super-bowling
 $ gem install bundler
 $ bundle install
 ```
