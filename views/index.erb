@@ -1,10 +1,110 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Super Bowling</title>
-        <link rel="stylesheet" href="/style.css" >
+      <title>Super Bowling</title>
+      <link rel="stylesheet" href="/styles.css" />
     </head>
     <body>
-      <h1>Welcome to the Super Bowl!</h1>
+      <div class="maincontainer">
+        <h1>Welcome to the Super Bowl!</h1>
+        <br />
+        
+        <table id="scorecard" class="scorecard">
+          <thead>
+            <tr style="height: 25px; width: 30px">
+              <th scope="col" colspan="2">Frame 1</th>
+              <th scope="col" colspan="2">Frame 2</th>
+              <th scope="col" colspan="2">Frame 3</th>
+              <th scope="col" colspan="2">Frame 4</th>
+              <th scope="col" colspan="2">Frame 5</th>
+              <th scope="col" colspan="2">Frame 6</th>
+              <th scope="col" colspan="2">Frame 7</th>
+              <th scope="col" colspan="2">Frame 8</th>
+              <th scope="col" colspan="2">Frame 9</th>
+              <th scope="col" colspan="3">Frame 10</th>
+              <th scope="col" colspan="2">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="height: 30px; width: 30px">
+              <% @scoreboard_array.each do |frame| %>
+                <td scope="row" class="rolls"><% frame ? frame.accessFrame[0] : '' %></td>
+                <td scope="row" class="rolls"><% frame ? frame.accessFrame[1] : '' %></td>
+              <% end %>
+              <td rowspan="2" colspan="2" id="total-score"><% @scoreboard == [] ? '' : @scoreboard.total %></td>
+            </tr>
+            <tr style="height: 40px; width: 20px">
+              <td scope="row" colspan="2" id="f1" class="frames"></td>
+              <td scope="row" colspan="2" id="f2" class="frames"></td>
+              <td scope="row" colspan="2" id="f3" class="frames"></td>
+              <td scope="row" colspan="2" id="f4" class="frames"></td>
+              <td scope="row" colspan="2" id="f5" class="frames"></td>
+              <td scope="row" colspan="2" id="f6" class="frames"></td>
+              <td scope="row" colspan="2" id="f7" class="frames"></td>
+              <td scope="row" colspan="2" id="f8" class="frames"></td>
+              <td scope="row" colspan="2" id="f9" class="frames"></td>
+              <td scope="row" colspan="3" id="f10" class="frames"></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <br /><br /><br />
+          <div id="buttons" class='button_group'>
+          <% if @roll_count == 0 %>
+            <%roll = 1%>
+          <% elsif @frame.accessFrame.length == 0 %>
+            <%roll = 1%>
+          <%else%>
+            <%roll = 2%>
+          <%end%>
+            <form method="post" action="/roll<%=roll%>" class="roll_button">
+              <input type="hidden" name="roll" value="0">
+              <input class='btn' type='submit' value='0'>
+            </form>
+             <form method="post" action="/roll<%=roll%>" class="roll_button">
+              <input type="hidden" name="roll" value="1">
+              <input class='btn' type='submit' value='1'>
+            </form>
+             <form method="post" action="/roll<%=roll%>" class="roll_button">
+              <input type="hidden" name="roll" value="2">
+              <input class='btn' type='submit' value='2'>
+            </form>
+             <form method="post" action="/roll<%=roll%>" class="roll_button">
+              <input type="hidden" name="roll" value="3">
+              <input class='btn' type='submit' value='3'>
+            </form>
+             <form method="post" action="/roll<%=roll%>" class="roll_button">
+              <input type="hidden" name="roll" value="4">
+              <input class='btn' type='submit' value='4'>
+            </form>
+             <form method="post" action="/roll<%=roll%>" class="roll_button">
+              <input type="hidden" name="roll" value="5">
+              <input class='btn' type='submit' value='5'>
+            </form>
+             <form method="post" action="/roll<%=roll%>" class="roll_button">
+              <input type="hidden" name="roll" value="6">
+              <input class='btn' type='submit' value='6'>
+            </form>
+             <form method="post" action="/roll<%=roll%>" class="roll_button">
+              <input type="hidden" name="roll" value="7">
+              <input class='btn' type='submit' value='7'>
+            </form>
+             <form method="post" action="/roll<%=roll%>" class="roll_button">
+              <input type="hidden" name="roll" value="8">
+              <input class='btn' type='submit' value='8'>
+            </form>
+             <form method="post" action="/roll<%=roll%>" class="roll_button">
+              <input type="hidden" name="roll" value="9">
+              <input class='btn' type='submit' value='9'>
+            </form>
+             <form method="post" action="/roll<%=roll%>" class="roll_button">
+              <input type="hidden" name="roll" value="10">
+              <input class='btn' type='submit' value='10'>
+            </form>
+          
+            <button id="reset">Reset</button>
+          </div>
+        </form>
+      </div>
     </body>
 </html>

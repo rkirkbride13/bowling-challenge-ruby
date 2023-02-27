@@ -1,10 +1,14 @@
 class Frame
 
-  def initialize(roll_1, roll_2, roll_3 = 0)
+  def initialize
     @frame = []
-    @frame << roll_1
-    @frame << roll_2
-    if roll_3 != 0 then @frame << roll_3 end
+    # @frame << roll_1
+    # @frame << roll_2
+    # if roll_3 != 0 then @frame << roll_3 end
+  end
+
+  def addRoll(roll)
+    @frame << roll
   end
 
   def accessFrame

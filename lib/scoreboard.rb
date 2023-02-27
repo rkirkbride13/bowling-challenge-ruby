@@ -15,6 +15,10 @@ class Scoreboard
     return @frame_count
   end
 
+  def accessScoreboard
+    return @scoreboard
+  end
+
   def calculateLastFrame
     last_frame = @scoreboard[9]
     @frame_count == 10 ? last_frame.frameTotal : 0
