@@ -1,5 +1,5 @@
 
-Ruby Bowling Challenge
+Super Bowl
 =================
 
 ## Overview
