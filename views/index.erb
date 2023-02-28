@@ -35,7 +35,6 @@
             </tbody>
           </table>
         <% end %>
-
         <br /><br /><br />
           <div id="buttons" class='button_group'>
           <% if @roll_count == 0 %>
@@ -45,50 +44,12 @@
           <%else%>
             <%roll = 2%>
           <%end%>
+          <% (0..10).each do |int| %>
             <form method="post" action="/roll<%=roll%>" class="roll_button">
-              <input type="hidden" name="roll" value="0">
-              <input class='btn' type='submit' value='0'>
+              <input type="hidden" name="roll" value=<%=int%>>
+              <input class='btn' type='submit' value=<%=int%>>
             </form>
-             <form method="post" action="/roll<%=roll%>" class="roll_button">
-              <input type="hidden" name="roll" value="1">
-              <input class='btn' type='submit' value='1'>
-            </form>
-             <form method="post" action="/roll<%=roll%>" class="roll_button">
-              <input type="hidden" name="roll" value="2">
-              <input class='btn' type='submit' value='2'>
-            </form>
-             <form method="post" action="/roll<%=roll%>" class="roll_button">
-              <input type="hidden" name="roll" value="3">
-              <input class='btn' type='submit' value='3'>
-            </form>
-             <form method="post" action="/roll<%=roll%>" class="roll_button">
-              <input type="hidden" name="roll" value="4">
-              <input class='btn' type='submit' value='4'>
-            </form>
-             <form method="post" action="/roll<%=roll%>" class="roll_button">
-              <input type="hidden" name="roll" value="5">
-              <input class='btn' type='submit' value='5'>
-            </form>
-             <form method="post" action="/roll<%=roll%>" class="roll_button">
-              <input type="hidden" name="roll" value="6">
-              <input class='btn' type='submit' value='6'>
-            </form>
-             <form method="post" action="/roll<%=roll%>" class="roll_button">
-              <input type="hidden" name="roll" value="7">
-              <input class='btn' type='submit' value='7'>
-            </form>
-             <form method="post" action="/roll<%=roll%>" class="roll_button">
-              <input type="hidden" name="roll" value="8">
-              <input class='btn' type='submit' value='8'>
-            </form>
-             <form method="post" action="/roll<%=roll%>" class="roll_button">
-              <input type="hidden" name="roll" value="9">
-              <input class='btn' type='submit' value='9'>
-            </form>
-             <form method="post" action="/roll<%=roll%>" class="roll_button">
-              <input type="hidden" name="roll" value="10">
-              <input class='btn' type='submit' value='10'>
-            </form>
+          <%end%>
             <form method="post" action="/reset" class="roll_button">
               <input class='btn' type='submit' value='Reset'>
             </form>
