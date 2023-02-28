@@ -6,7 +6,7 @@ class Scoreboard
 
   def addFrame(frame)
     @frame_array = frame.accessFrame
-    checkForFails
+    # checkForFails
     @scoreboard << frame
     @frame_count += 1
   end
@@ -52,32 +52,5 @@ class Scoreboard
     @sum += calculateLastFrame
     return @sum
   end
-
-  private
-
-  def checkForFails
-    fail "A roll cannot be greater than 10" if (@frame_array[0] || @frame_array[1]) > 10
-    if @frame_count < 9
-      fail "Sum of rolls cannot be greater than 10" if @frame_array.sum > 10
-    else
-      if @frame_array[0..1].count(10) == 0
-      fail "Sum of rolls cannot be greater than 10" if @frame_array[0..1].sum > 10
-      elsif @frame_array[1..2].count(10) == 0
-        fail "Sum of rolls cannot be greater than 10" if @frame_array[1..2].sum > 10
-      end
-    end
-  end
-
-  # def frameWithBonus
-  #   accessScoreboard.each_with_index do |frame, index|
-  #     if frame.checkForSpare && !accessScoreboard[index + 1]
-  #       frame.frameTotal
-  #     elsif frame.checkForSpare && accessScoreboard[index + 1]
-  #       frame.frameTotal + accessScoreboard[index + 1].accessFrame[0]
-  #     else
-  #       frame.frameTotal
-  #     end
-  #   end
-  # end
 
 end

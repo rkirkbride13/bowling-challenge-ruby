@@ -20,6 +20,12 @@ h2 {
   text-align: center;
 }
 
+p {
+  color: #dfe0e4;
+  font-family: 'Graduate', cursive;
+  font-size: 12px;
+  text-align: center;
+}
 
 .maincontainer {
   display: flex;
@@ -43,7 +49,7 @@ h2 {
   font-family: 'Inconsolata', monospace;
 }
 
-table.scorecard {
+table.scoreboard {
   background-color: rgb(185, 0, 151);
   border-collapse: collapse;
   border-width: 2px;
@@ -54,8 +60,8 @@ table.scorecard {
   text-align: center;
 }
 
-table.scorecard td,
-table.scorecard th {
+table.scoreboard td,
+table.scoreboard th {
   border-width: 2px;
   border-color: #fff;
   border-style: double;

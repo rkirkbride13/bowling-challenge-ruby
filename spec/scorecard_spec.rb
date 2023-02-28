@@ -254,34 +254,4 @@ RSpec.describe Scoreboard do
       expect(scoreboard.frameCount).to eq(10)
     end
   end
-
-  context "fails" do
-    it "fails if a roll is greater than 10" do
-      scoreboard = Scoreboard.new
-      frame1 = double :frame, accessFrame: [11,0], frameTotal: 11, checkForSpare: false, checkForStrike: true
-      expect{scoreboard.addFrame(frame1)}.to raise_error("A roll cannot be greater than 10")
-    end
-
-    it "fails if both rolls sum greater than 10" do
-      scoreboard = Scoreboard.new
-      frame1 = double :frame, accessFrame: [5,6], frameTotal: 11, checkForSpare: false, checkForStrike: true
-      expect{scoreboard.addFrame(frame1)}.to raise_error("Sum of rolls cannot be greater than 10")
-    end
-
-    it "fails if the final frame is a strike first roll then two scores that add to more than 10" do
-      scoreboard = Scoreboard.new
-      frame1 = double :frame, accessFrame: [4,3], frameTotal: 7, checkForSpare: false, checkForStrike: false
-      9.times{scoreboard.addFrame(frame1)}
-      frame10 = double :frame, accessFrame: [10,8,3], frameTotal: 21, checkForSpare: false, checkForStrike: true
-      expect{scoreboard.addFrame(frame10)}.to raise_error("Sum of rolls cannot be greater than 10")
-    end
-
-    it "fails if the final frame is two scores that add to more than 10" do
-      scoreboard = Scoreboard.new
-      frame1 = double :frame, accessFrame: [4,3], frameTotal: 7, checkForSpare: false, checkForStrike: false
-      9.times{scoreboard.addFrame(frame1)}
-      frame10 = double :frame, accessFrame: [9,2,3], frameTotal: 21, checkForSpare: false, checkForStrike: true
-      expect{scoreboard.addFrame(frame10)}.to raise_error("Sum of rolls cannot be greater than 10")
-    end
-  end
 end

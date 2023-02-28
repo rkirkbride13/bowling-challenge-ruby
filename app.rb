@@ -14,6 +14,7 @@ class Application < Sinatra::Base
     @frame = session[:frame]
     @scoreboard = session[:scoreboard]
     if @scoreboard != [] then @scoreboard_array = @scoreboard.accessScoreboard end
+    @error = session[:error]
     return erb(:index)
   end
 
@@ -26,28 +27,35 @@ class Application < Sinatra::Base
 
   post '/roll2' do
     initialize_scoreboard
-    frame = session[:frame]
-    frame.addRoll(params[:roll].to_i)
-    if !(@scoreboard.frameCount == 9 && frame.frameTotal >= 10)
-      @scoreboard.addFrame(frame)
-      frame = Frame.new
+    @frame = session[:frame]
+    @frame.addRoll(params[:roll].to_i)
+    if !generate_error.empty?
+      session[:error] = generate_error
+      @frame.accessFrame.pop
+      redirect '/'
     end
+    if !(@scoreboard.frameCount == 9 && @frame.frameTotal >= 10)
+      @scoreboard.addFrame(@frame)
+      @frame = Frame.new
+    end
+    session[:error] = ''
     session[:scoreboard] = @scoreboard
-    session[:frame] = frame
+    session[:frame] = @frame
     redirect '/'
   end
 
   post '/roll3' do
-    frame = session[:frame]
-    frame.addRoll(params[:roll].to_i)
+    @frame = session[:frame]
+    @frame.addRoll(params[:roll].to_i)
     @scoreboard = session[:scoreboard]
-    @scoreboard.addFrame(frame)
+    @scoreboard.addFrame(@frame)
     session[:scoreboard] = @scoreboard
     redirect '/'
   end
 
   post '/reset' do
     session[:initialized?] = false
+    session[:error] = ''
     redirect '/'
   end
 
@@ -63,6 +71,15 @@ class Application < Sinatra::Base
 
   def initialize_scoreboard
     session[:scoreboard] != [] ? @scoreboard = session[:scoreboard] : @scoreboard = Scoreboard.new
+  end
+
+  def generate_error
+    if session[:scoreboard] == [] && @frame.frameTotal > 10
+      return "Sum of rolls cannot be greater than 10"
+    elsif session[:scoreboard] != [] && session[:scoreboard].frameCount < 9 && @frame.frameTotal > 10
+      return "Sum of rolls cannot be greater than 10"
+    end
+    return ''
   end
 
 end

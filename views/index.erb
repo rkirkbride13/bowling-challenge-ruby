@@ -10,7 +10,7 @@
         <h2>please click a number for each of your rolls</h2>
         <br />
         <% if @scoreboard != [] %>
-          <table id="scorecard" class="scorecard">
+          <table id="scoreboard" class="scoreboard">
             <thead>
               <tr style="height: 25px; width: 30px">
                 <% @scoreboard_array.each_with_index do |frame, index| %>
@@ -51,7 +51,7 @@
           </table>
         <% end %>
         <br /><br /><br />
-          <div id="buttons" class='button_group'>
+          <div id="buttons" class="button_group">
           <% if @roll_count == 0 %>
             <%roll = 1%>
           <% elsif @frame.accessFrame.length == 0 %>
@@ -68,7 +68,7 @@
           <% (0..10).each do |int| %>
             <form method="post" action="/roll<%=roll%>" class="roll_button">
               <input type="hidden" name="roll" value=<%=int%>>
-              <input class='btn' type='submit' value=<%=int%>>
+              <input class="btn" type="submit" value=<%=int%>>
             </form>
           <%end%>
             <form method="post" action="/reset" class="roll_button">
@@ -76,6 +76,7 @@
             </form>
           </div>
         </form>
+        <p><%=@error%></p>
       </div>
     </body>
 </html>
