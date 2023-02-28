@@ -20,8 +20,7 @@ class Scoreboard
   end
 
   def calculateLastFrame
-    last_frame = @scoreboard[9]
-    @frame_count == 10 ? last_frame.frameTotal : 0
+    @frame_count == 10 ? @scoreboard[9].frameTotal : 0
   end
 
   def calculateFramesTotal
@@ -34,9 +33,8 @@ class Scoreboard
           @sum += frame0.frameTotal
           if frame1
             if frame1.checkForStrike
-              if frame2
-                @sum += (frame_index == 8 ? frame1.accessFrame[0..1].sum : frame1.accessFrame[0] + frame2.accessFrame[0])
-              end
+              if frame_index == 8 then @sum += frame1.accessFrame[0..1].sum end
+              if frame2 then @sum += frame1.accessFrame[0] + frame2.accessFrame[0] end
             else
               @sum += (frame1 ? frame1.accessFrame[0..1].sum : 0)
             end

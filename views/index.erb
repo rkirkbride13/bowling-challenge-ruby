@@ -14,7 +14,7 @@
             <thead>
               <tr style="height: 25px; width: 30px">
                 <% @scoreboard_array.each_with_index do |frame, index| %>
-                  <th scope="col" colspan="2">Frame <%=index + 1%></th>
+                  <th scope="col" colspan="<%=(index + 1 == 10 ? 3 : 2)%>">Frame <%=index + 1%></th>
                 <% end %>
                 <th scope="col" colspan="2">Total</th>
               </tr>
@@ -24,12 +24,15 @@
                 <% @scoreboard_array.each do |frame| %>
                   <td scope="row" class="rolls"><%=frame.accessFrame[0]%></td>
                   <td scope="row" class="rolls"><%=frame.accessFrame[1]%></td>
+                  <% if frame.accessFrame[2] %>
+                    <td scope="row" class="rolls"><%=frame.accessFrame[2]%></td>
+                  <% end %>
                 <% end %>
                 <td rowspan="2" colspan="2" id="total-score"><%=@scoreboard.total%></td>
               </tr>
               <tr style="height: 40px; width: 20px">
                 <% @scoreboard_array.each_with_index do |frame, index| %>
-                  <td scope="row" colspan="2" class="frames">
+                  <td scope="row" colspan="<%=(index + 1 == 10 ? 3 : 2)%>" class="frames">
                     <% if !@scoreboard_array[index + 1] || (!frame.checkForSpare && !frame.checkForStrike)%>
                       <%=frame.frameTotal%>
                     <% elsif frame.checkForSpare && @scoreboard_array[index + 1] %>
@@ -38,7 +41,7 @@
                       <% if @scoreboard_array[index + 1].checkForStrike && @scoreboard_array[index + 2]%>
                         <%=frame.frameTotal + @scoreboard_array[index + 1].accessFrame[0] + @scoreboard_array[index + 2].accessFrame[0]%>
                       <% else %>
-                        <%=frame.frameTotal + @scoreboard_array[index + 1].frameTotal %>
+                        <%=frame.frameTotal + @scoreboard_array[index + 1].accessFrame[0..1].sum %>
                       <% end %>
                     <% end %>
                   </td>
@@ -53,6 +56,12 @@
             <%roll = 1%>
           <% elsif @frame.accessFrame.length == 0 %>
             <%roll = 1%>
+          <% elsif @scoreboard != [] %>
+            <% if @scoreboard.frameCount == 9 && @frame.accessFrame.length == 2 && @frame.frameTotal >= 10 %>
+              <%roll = 3%>
+            <% else%>
+              <%roll = 2%>
+            <% end %>
           <%else%>
             <%roll = 2%>
           <%end%>

@@ -2,9 +2,6 @@ class Frame
 
   def initialize
     @frame = []
-    # @frame << roll_1
-    # @frame << roll_2
-    # if roll_3 != 0 then @frame << roll_3 end
   end
 
   def addRoll(roll)

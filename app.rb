@@ -13,7 +13,7 @@ class Application < Sinatra::Base
     initialize_game
     @frame = session[:frame]
     @scoreboard = session[:scoreboard]
-    if @scoreboard != [] then @scoreboard_array = @scoreboard.accessScoreboard[0..8] end
+    if @scoreboard != [] then @scoreboard_array = @scoreboard.accessScoreboard end
     return erb(:index)
   end
 
@@ -28,17 +28,21 @@ class Application < Sinatra::Base
     initialize_scoreboard
     frame = session[:frame]
     frame.addRoll(params[:roll].to_i)
-    @scoreboard.addFrame(frame)
+    if !(@scoreboard.frameCount == 9 && frame.frameTotal >= 10)
+      @scoreboard.addFrame(frame)
+      frame = Frame.new
+    end
     session[:scoreboard] = @scoreboard
-    frame = Frame.new
     session[:frame] = frame
     redirect '/'
   end
 
   post '/roll3' do
-    @roll3 = params[:roll]
-    @frame.addRoll(@roll3)
-    @scoreboard.addFrame(@frame)
+    frame = session[:frame]
+    frame.addRoll(params[:roll].to_i)
+    @scoreboard = session[:scoreboard]
+    @scoreboard.addFrame(frame)
+    session[:scoreboard] = @scoreboard
     redirect '/'
   end
 
