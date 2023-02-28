@@ -26,17 +26,21 @@ class Scoreboard
 
   def calculateFramesTotal
     @scoreboard[0..8].each_with_index do |frame0, frame_index|
-      @frame1 = @scoreboard[frame_index + 1]
-      @frame2 = @scoreboard[frame_index + 2]
+      frame1 = @scoreboard[frame_index + 1]
+      frame2 = @scoreboard[frame_index + 2]
       if frame0.checkForSpare
-        @sum += frame0.frameTotal + (@frame1 ? @frame1.accessFrame[0] : 0)
+        @sum += frame0.frameTotal + (frame1 ? frame1.accessFrame[0] : 0)
       elsif frame0.checkForStrike
-        @sum += frame0.frameTotal
-        if frame1.checkForStrike
-          @sum += (frame_index == 8 ? @frame1.accessFrame[0..1].sum : @frame1.accessFrame[0] + @frame2.accessFrame[0])
-        else
-          @sum += @frame1.accessFrame[0..1].sum
-        end
+          @sum += frame0.frameTotal
+          if frame1
+            if frame1.checkForStrike
+              if frame2
+                @sum += (frame_index == 8 ? frame1.accessFrame[0..1].sum : frame1.accessFrame[0] + frame2.accessFrame[0])
+              end
+            else
+              @sum += (frame1 ? frame1.accessFrame[0..1].sum : 0)
+            end
+          end
       else
         @sum += frame0.frameTotal
       end
@@ -65,4 +69,17 @@ class Scoreboard
       end
     end
   end
+
+  # def frameWithBonus
+  #   accessScoreboard.each_with_index do |frame, index|
+  #     if frame.checkForSpare && !accessScoreboard[index + 1]
+  #       frame.frameTotal
+  #     elsif frame.checkForSpare && accessScoreboard[index + 1]
+  #       frame.frameTotal + accessScoreboard[index + 1].accessFrame[0]
+  #     else
+  #       frame.frameTotal
+  #     end
+  #   end
+  # end
+
 end

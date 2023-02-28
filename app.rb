@@ -13,7 +13,7 @@ class Application < Sinatra::Base
     initialize_game
     @frame = session[:frame]
     @scoreboard = session[:scoreboard]
-    if @scoreboard != [] then @scoreboard_array = @scoreboard.accessScoreboard end
+    if @scoreboard != [] then @scoreboard_array = @scoreboard.accessScoreboard[0..8] end
     return erb(:index)
   end
 
